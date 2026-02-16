@@ -120,38 +120,43 @@ button { font-family: var(--font); }
 .section-bg::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: -15%; left: 0; right: 0; bottom: -15%;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
   background-repeat: no-repeat;
-  opacity: 0.11;
+  opacity: 0.055;
   z-index: 0;
   pointer-events: none;
   filter: saturate(0.3);
+  will-change: transform;
+  transform: translate3d(0, var(--parallax-y, 0px), 0);
 }
 [data-theme="dark"] .section-bg::before {
-  opacity: 0.08;
-  filter: saturate(0.2) brightness(0.7);
+  opacity: 0.028;
+  filter: saturate(0.2);
 }
+.section-bg--stats::before { opacity: 0.11; }
+[data-theme="dark"] .section-bg--stats::before { opacity: 0.056; }
 .section-bg > .container { position: relative; z-index: 1; }
-.section-bg--audience::before { background-image: url('images/bg-students.jpg'); }
+.section-bg--trial::before { background-image: url('images/bg-students.jpg'); }
+.section-bg--audience::before { background-image: url('images/bg-chalkboard.jpg'); }
 .section-bg--stats::before { background-image: url('images/bg-math.jpg'); }
 .section-bg--about::before { background-image: url('images/bg-teacher.jpg'); }
 .section-bg--steps::before { background-image: url('images/bg-school.jpg'); }
 .section-bg--method::before { background-image: url('images/bg-child.jpg'); }
-.section-bg--types::before { background-image: url('images/bg-library.jpg'); }
-.section-bg--faq::before { background-image: url('images/bg-supplies.jpg'); }
-.section-bg--form::before { background-image: url('images/bg-laptop.jpg'); }
-.section-bg--trial::before { background-image: url('images/bg-classroom.jpg'); }
-.section-bg--myths::before { background-image: url('images/bg-school.jpg'); }
-.section-bg--guarantees::before { background-image: url('images/bg-students.jpg'); }
-.section-bg--reviews::before { background-image: url('images/bg-students.jpg'); }
-.section-bg--parents::before { background-image: url('images/bg-child.jpg'); }
+.section-bg--programs::before { background-image: url('images/bg-library.jpg'); }
+.section-bg--types::before { background-image: url('images/bg-supplies.jpg'); }
+.section-bg--myths::before { background-image: url('images/bg-laptop.jpg'); }
+.section-bg--guarantees::before { background-image: url('images/bg-books.jpg'); }
+.section-bg--reviews::before { background-image: url('images/bg-notebook.jpg'); }
+.section-bg--parents::before { background-image: url('images/bg-pencils.jpg'); }
+.section-bg--faq::before { background-image: url('images/bg-desk.jpg'); }
+.section-bg--pricing::before { background-image: url('images/bg-pricing.jpg'); }
+.section-bg--format::before { background-image: url('images/bg-whiteboard.jpg'); }
+.section-bg--form::before { background-image: url('images/bg-graduation.jpg'); }
 @media (max-width: 768px) {
-  .section-bg::before { background-attachment: scroll; opacity: 0.12; }
-  [data-theme="dark"] .section-bg::before { opacity: 0.09; }
-  .hero-bg-image { background-attachment: scroll !important; }
+  .section-bg::before { opacity: 0.12; }
+  [data-theme="dark"] .section-bg::before { opacity: 0.063; }
 }
 
 /* ===================== HEADER ===================== */
@@ -463,20 +468,20 @@ button { font-family: var(--font); }
 }
 .hero-bg-image {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: -20%; left: 0; right: 0; bottom: -20%;
   background-image: url('images/bg-classroom.jpg');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
   background-repeat: no-repeat;
   opacity: 0.11;
   z-index: 0;
   pointer-events: none;
   filter: saturate(0.3);
+  will-change: transform;
 }
 [data-theme="dark"] .hero-bg-image {
-  opacity: 0.07;
-  filter: saturate(0.2) brightness(0.7);
+  opacity: 0.05;
+  filter: saturate(0.2);
 }
 .hero-content {
   position: relative;
@@ -698,8 +703,7 @@ button { font-family: var(--font); }
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     background: rgba(255,255,255,0.03);
-    backdrop-filter: blur(1px);
-    -webkit-backdrop-filter: blur(1px);
+    will-change: transform;
 }
 
 .hero-geometric .geo-ring:nth-child(1) {
@@ -1366,7 +1370,6 @@ body::before {
   border-radius: 50%;
   border: 1.5px solid var(--color-border-card);
   background: var(--color-surface);
-  backdrop-filter: blur(12px);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1593,6 +1596,12 @@ body::before {
 @media (max-width: 768px) {
   :root {
     --section-padding: 80px;
+  }
+  .header {
+    background: var(--color-header-bg);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom-color: var(--color-header-border);
   }
   .header-center { display: none; }
   .header-center.open {
@@ -2284,7 +2293,7 @@ body::before {
 </section>
 
 <!-- ==================== ПРОГРАММЫ ОБУЧЕНИЯ ==================== -->
-<section class="section section--white section-bg section-bg--steps" id="programs">
+<section class="section section--white section-bg section-bg--programs" id="programs">
   <div class="container">
     <div class="section-heading-glass-wrap"><p class="section-eyebrow reveal section-heading-glass">Программы</p></div>
     <div class="section-heading-glass-wrap"><h2 class="section-heading reveal section-heading-glass">Программы обучения</h2></div>
@@ -2419,7 +2428,7 @@ body::before {
 </section>
 
 <!-- ==================== ФОРМАТ ЗАНЯТИЙ ==================== -->
-<section class="section section--gray" id="format">
+<section class="section section--gray section-bg section-bg--format" id="format">
   <div class="container">
     <div class="section-heading-glass-wrap"><p class="section-eyebrow reveal section-heading-glass">Формат</p></div>
     <div class="section-heading-glass-wrap"><h2 class="section-heading reveal section-heading-glass">Формат занятий</h2></div>
@@ -2540,7 +2549,7 @@ body::before {
 </section>
 
 <!-- ==================== ЦЕНЫ ==================== -->
-<section class="section section--white" id="pricing">
+<section class="section section--white section-bg section-bg--pricing" id="pricing">
   <div class="container">
     <div class="section-heading-glass-wrap"><p class="section-eyebrow reveal section-heading-glass">Стоимость</p></div>
     <div class="section-heading-glass-wrap"><h2 class="section-heading reveal section-heading-glass">Цены</h2></div>
@@ -3334,21 +3343,45 @@ body::before {
     });
   }
 
-  /* ========== SMOOTH HERO PARALLAX ========== */
+  /* ========== SMOOTH PARALLAX (GPU-accelerated, no jitter) ========== */
   var heroBg = document.querySelector('.hero-bg-image');
-  var parallaxTicking = false;
+  var sectionBgs = document.querySelectorAll('.section-bg');
+  var ticking = false;
+
+  function updateParallax() {
+    var scrollY = window.scrollY;
+    var viewH = window.innerHeight;
+
+    // Hero background
+    if (heroBg) {
+      var heroSection = heroBg.parentElement;
+      var heroRect = heroSection.getBoundingClientRect();
+      if (heroRect.bottom > 0 && heroRect.top < viewH) {
+        var progress = -heroRect.top / (heroRect.height + viewH);
+        heroBg.style.transform = 'translate3d(0,' + (progress * heroRect.height * 0.4) + 'px,0)';
+      }
+    }
+
+    // Section backgrounds (::before can't be targeted directly, use CSS custom property)
+    for (var i = 0; i < sectionBgs.length; i++) {
+      var rect = sectionBgs[i].getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < viewH) {
+        var progress = -rect.top / (rect.height + viewH);
+        var offset = progress * rect.height * 0.15;
+        sectionBgs[i].style.setProperty('--parallax-y', offset + 'px');
+      }
+    }
+
+    ticking = false;
+  }
+
   window.addEventListener('scroll', function() {
-    if (!parallaxTicking) {
-      requestAnimationFrame(function() {
-        var scrollY = window.scrollY;
-        if (heroBg && scrollY < window.innerHeight) {
-          heroBg.style.transform = 'translateY(' + (scrollY * 0.3) + 'px)';
-        }
-        parallaxTicking = false;
-      });
-      parallaxTicking = true;
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
     }
   }, { passive: true });
+  updateParallax();
 
 })();
 

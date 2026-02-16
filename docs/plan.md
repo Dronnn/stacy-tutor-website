@@ -107,3 +107,19 @@ Replace the simple click-to-toggle theme button with a hover dropdown picker (li
 - [x] 1. Add CSS: `.theme-picker`, `.theme-dropdown`, `.theme-dropdown-inner`, `.theme-option` styles
 - [x] 2. Replace HTML: wrap theme toggle in `.theme-picker` div, add dropdown with 3 option buttons
 - [x] 3. Replace JS: new 3-mode system (light/dark/system), `applyMode()`, `getEffectiveTheme()`, `updateThemeOptions()`, system listener update, dropdown click handlers, fallback cycle on toggle click
+
+---
+
+# Plan: Visual Polish — Backgrounds, Performance, Parallax (2026-02-16)
+
+## Goal
+Optimize performance, add JS parallax, tune background opacities, replace/add unique background images for all sections.
+
+## Steps
+
+- [x] 1. Fix dark theme lag: remove `brightness(0.7)` filter, compensate with lower opacity
+- [x] 2. Fix mobile header transparency (add solid bg on ≤768px)
+- [x] 3. Replace `background-attachment: fixed` with JS parallax (transform: translate3d, 40% speed)
+- [x] 4. Iteratively reduce geometric element opacity (→0.117) and speed (→30.3s/24.2s/18.2s/14.5s)
+- [x] 5. Make all section background images unique (no duplicates), add missing backgrounds (format, pricing)
+- [x] 6. Lower background opacity for all sections except hero and stats (→0.055 light / 0.028 dark)
