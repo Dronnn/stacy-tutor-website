@@ -65,3 +65,32 @@ Expand informatics content throughout the site and change class range from 1-9 t
 - [x] 7. Add 3 FAQ items (informatics questions)
 - [x] 8. Add 1 myth card (myth 6 about programming)
 - [x] 9. Adjust grids/CSS for new card counts + reveal-delay classes
+
+---
+
+# Plan: Create Beautiful HTML Resume Page (2026-02-16)
+
+## Goal
+Create a premium, Apple-style HTML resume page for Anastasia Mayer (teacher) with all her professional info, A4 proportions, two-column layout, timeline, skill badges, and print-ready styles.
+
+## Steps
+
+- [x] 1. Create resume.html with full structure: header (photo, name, contacts), two-column layout (left: skills/education/qualities, right: experience timeline/achievements)
+- [x] 2. Style with Inter font, indigo accent (#6366F1), clean white background, timeline dots, pill badges, section borders
+- [x] 3. Add print styles (@media print) for A4 output
+- [x] 4. Verify file is saved and complete
+
+---
+
+# Plan: Resume Two-Page Print Layout Fix (2026-02-16)
+
+## Goal
+Fix resume.html for proper two-page PDF printing: split into two explicit page divs, compact headers, 1cm margins, proper content distribution.
+
+## Steps
+
+- [x] 1. Add new CSS styles: mini-header, page-1/page-2, updated compact header, print @page 1cm margins
+- [x] 2. Split HTML into two .page divs — page-1 (header + left column + first 4 jobs), page-2 (mini-header + remaining 3 jobs + achievements)
+- [x] 3. Update print styles for proper page breaks, margins, color preservation
+- [x] 4. Add screen styles for gap between pages
+- [x] 5. Verify structure and completeness

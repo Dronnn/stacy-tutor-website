@@ -264,7 +264,11 @@ button { font-family: var(--font); }
 [data-theme="dark"] .theme-icon--sun { opacity: 1; transform: rotate(0deg) scale(1); }
 [data-theme="dark"] .theme-icon--moon { opacity: 0; transform: rotate(90deg) scale(0.5); }
 
-/* Accent color toggle */
+/* Accent color picker */
+.accent-picker {
+    position: relative;
+    flex-shrink: 0;
+}
 .accent-toggle {
     width: 32px;
     height: 32px;
@@ -297,6 +301,61 @@ button { font-family: var(--font); }
 }
 .accent-dot.spin {
     transform: rotate(180deg);
+}
+.accent-dropdown {
+    position: absolute;
+    top: 100%;
+    right: -6px;
+    padding-top: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: all 0.2s ease;
+    pointer-events: none;
+    z-index: 1001;
+}
+.accent-dropdown-inner {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+.accent-picker:hover .accent-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+[data-theme="dark"] .accent-dropdown-inner {
+    background: rgba(30, 30, 35, 0.92);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+.accent-swatch {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    padding: 0;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.accent-swatch:hover {
+    transform: scale(1.15);
+}
+.accent-swatch.active {
+    box-shadow: 0 0 0 2px var(--color-accent);
+    transform: scale(1.1);
 }
 
 /* Mobile hamburger */
@@ -961,10 +1020,17 @@ body::before {
   border-radius: 50%;
   background: var(--color-accent);
 }
-.resume-link {
-  display: inline-block;
+.resume-buttons {
+  display: flex;
+  gap: 12px;
   margin-top: 28px;
-  padding: 10px 20px;
+}
+.resume-link {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
   border: 2px solid var(--color-accent);
   border-radius: 8px;
   color: var(--color-accent);
@@ -972,6 +1038,7 @@ body::before {
   font-size: 0.95rem;
   font-weight: 500;
   transition: all 0.3s ease;
+  text-align: center;
 }
 .resume-link:hover {
   background: var(--color-accent);
@@ -1809,9 +1876,12 @@ body::before {
         <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
-      <button class="accent-toggle" id="accentToggle" aria-label="Сменить акцент" title="Сменить цвет акцента">
-        <span class="accent-dot" id="accentDot"></span>
-      </button>
+      <div class="accent-picker">
+        <button class="accent-toggle" id="accentToggle" aria-label="Сменить акцент" title="Сменить цвет акцента">
+          <span class="accent-dot" id="accentDot"></span>
+        </button>
+        <div class="accent-dropdown"><div class="accent-dropdown-inner" id="accentDropdown"></div></div>
+      </div>
       <a href="#contact-form" class="header-cta">Записаться</a>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Меню">
         <span></span><span></span><span></span>
@@ -2023,7 +2093,10 @@ body::before {
           <li>Сертификаты в области робототехнического образования и преподавания информатики</li>
         </ul>
 
-        <a href="резюме_Майер_Анастасия_Викторовна_2025.pdf" target="_blank" class="resume-link">📄 Скачать резюме (PDF)</a>
+        <div class="resume-buttons">
+          <a href="резюме_Майер_Анастасия_Викторовна_2025.pdf" target="_blank" class="resume-link">📄 Скачать резюме (PDF)</a>
+          <a href="resume-1page.html" target="_blank" class="resume-link">🌐 Резюме онлайн</a>
+        </div>
       </div>
     </div>
   </div>
@@ -2743,7 +2816,7 @@ body::before {
 <!-- ==================== FOOTER ==================== -->
 <footer class="footer">
   <div class="container">
-    <p>&copy; 2026 Анастасия Майер — Репетитор по математике и информатике | <a href="резюме_Майер_Анастасия_Викторовна_2025.pdf" target="_blank" class="footer-resume-link">Резюме преподавателя</a></p>
+    <p>&copy; 2026 Анастасия Майер — Репетитор по математике и информатике | <a href="резюме_Майер_Анастасия_Викторовна_2025.pdf" target="_blank" class="footer-resume-link">Резюме (PDF)</a> | <a href="resume-1page.html" target="_blank" class="footer-resume-link">Резюме онлайн</a></p>
   </div>
 </footer>
 
@@ -2862,15 +2935,79 @@ body::before {
       });
     }
 
-    // Accent color toggle
+    // Accent color picker — populate dropdown with swatches
     var accentToggle = document.getElementById('accentToggle');
     var accentDot = document.getElementById('accentDot');
+    var accentDropdown = document.getElementById('accentDropdown');
+
+    function updateActiveSwatches(activeIndex) {
+      if (!accentDropdown) return;
+      var swatches = accentDropdown.querySelectorAll('.accent-swatch');
+      for (var i = 0; i < swatches.length; i++) {
+        if (i === activeIndex) {
+          swatches[i].classList.add('active');
+        } else {
+          swatches[i].classList.remove('active');
+        }
+      }
+    }
+
+    if (accentDropdown) {
+      // Build swatch circles
+      for (var i = 0; i < accentColors.length; i++) {
+        var swatch = document.createElement('button');
+        swatch.className = 'accent-swatch';
+        swatch.style.background = accentColors[i].value;
+        swatch.setAttribute('data-index', i);
+        swatch.setAttribute('aria-label', accentColors[i].name);
+        swatch.setAttribute('title', accentColors[i].name);
+
+        // Apply colored shadow
+        (function(color) {
+          var rgb = hexToRgb(color);
+          swatch.style.boxShadow = '0 2px 8px rgba(' + rgb + ', 0.4)';
+        })(accentColors[i].value);
+
+        accentDropdown.appendChild(swatch);
+      }
+
+      // Mark current accent as active
+      var currentActive = getAccentIndex();
+      if (currentActive >= 0) {
+        updateActiveSwatches(currentActive);
+      }
+
+      // Click handler on swatches
+      accentDropdown.addEventListener('click', function(e) {
+        var target = e.target.closest('.accent-swatch');
+        if (!target) return;
+        var idx = parseInt(target.getAttribute('data-index'), 10);
+        if (isNaN(idx)) return;
+        applyAccent(idx);
+        try { localStorage.setItem(ACCENT_KEY, idx); } catch(err) {}
+        updateActiveSwatches(idx);
+
+        // Update swatch background colors for dark/light consistency
+        var swatches = accentDropdown.querySelectorAll('.accent-swatch');
+        for (var s = 0; s < swatches.length; s++) {
+          var c = isDark() ? accentColors[s].dark : accentColors[s].value;
+          swatches[s].style.background = c;
+          var rgb = hexToRgb(accentColors[s].value);
+          swatches[s].style.boxShadow = s === idx
+            ? '0 0 0 2px var(--color-accent)'
+            : '0 2px 8px rgba(' + rgb + ', 0.4)';
+        }
+      });
+    }
+
+    // Fallback: click on toggle button cycles to next color (mobile/touch)
     if (accentToggle) {
       accentToggle.addEventListener('click', function() {
         var currentIdx = getAccentIndex();
         var nextIdx = (currentIdx + 1) % accentColors.length;
         applyAccent(nextIdx);
         try { localStorage.setItem(ACCENT_KEY, nextIdx); } catch(e) {}
+        updateActiveSwatches(nextIdx);
 
         // Visual feedback: spin the dot
         if (accentDot) {
