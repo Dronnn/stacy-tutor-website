@@ -94,3 +94,16 @@ Fix resume.html for proper two-page PDF printing: split into two explicit page d
 - [x] 3. Update print styles for proper page breaks, margins, color preservation
 - [x] 4. Add screen styles for gap between pages
 - [x] 5. Verify structure and completeness
+
+---
+
+# Plan: Redesign Theme Toggle into Hover Dropdown Picker (2026-02-16)
+
+## Goal
+Replace the simple click-to-toggle theme button with a hover dropdown picker (like the accent color picker) offering 3 options: Light, Dark, System.
+
+## Steps
+
+- [x] 1. Add CSS: `.theme-picker`, `.theme-dropdown`, `.theme-dropdown-inner`, `.theme-option` styles
+- [x] 2. Replace HTML: wrap theme toggle in `.theme-picker` div, add dropdown with 3 option buttons
+- [x] 3. Replace JS: new 3-mode system (light/dark/system), `applyMode()`, `getEffectiveTheme()`, `updateThemeOptions()`, system listener update, dropdown click handlers, fallback cycle on toggle click

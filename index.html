@@ -264,6 +264,79 @@ button { font-family: var(--font); }
 [data-theme="dark"] .theme-icon--sun { opacity: 1; transform: rotate(0deg) scale(1); }
 [data-theme="dark"] .theme-icon--moon { opacity: 0; transform: rotate(90deg) scale(0.5); }
 
+/* Theme picker (hover dropdown) */
+.theme-picker {
+  position: relative;
+}
+.theme-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  padding-top: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: all 0.2s ease;
+  pointer-events: none;
+  z-index: 1001;
+}
+.theme-dropdown-inner {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  min-width: 160px;
+}
+[data-theme="dark"] .theme-dropdown-inner {
+  background: rgba(30, 30, 35, 0.92);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+.theme-picker:hover .theme-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.theme-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: all 0.15s ease;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+.theme-option:hover {
+  background: var(--color-accent-soft);
+  color: var(--color-text);
+}
+.theme-option.active {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+.theme-option-icon {
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.theme-option-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
 /* Accent color picker */
 .accent-picker {
     position: relative;
@@ -273,10 +346,8 @@ button { font-family: var(--font); }
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    border: 1.5px solid var(--color-border);
-    background: var(--color-glass);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    border: none;
+    background: transparent;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -285,7 +356,7 @@ button { font-family: var(--font); }
     flex-shrink: 0;
 }
 .accent-toggle:hover {
-    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
     transform: scale(1.08);
 }
 .accent-toggle:active {
@@ -608,14 +679,14 @@ button { font-family: var(--font); }
 /* ===================== HERO GEOMETRIC ANIMATION ===================== */
 .hero-geometric {
     position: absolute;
-    right: 8%;
+    left: 58%;
     top: 50%;
-    transform: translateY(-50%);
-    width: 380px;
-    height: 380px;
-    z-index: 0;
+    transform: translate(-50%, -50%);
+    width: 620px;
+    height: 620px;
+    z-index: 1;
     pointer-events: none;
-    opacity: 0.18;
+    opacity: 0.117;
 }
 
 .hero-geometric .geo-ring {
@@ -635,28 +706,28 @@ button { font-family: var(--font); }
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    animation: geoSpin 25s linear infinite;
+    animation: geoSpin 30.3s linear infinite;
 }
 
 .hero-geometric .geo-ring:nth-child(2) {
     width: 78%;
     height: 78%;
     border-radius: 8px;
-    animation: geoSpin 20s linear infinite reverse;
+    animation: geoSpin 24.2s linear infinite reverse;
 }
 
 .hero-geometric .geo-ring:nth-child(3) {
     width: 56%;
     height: 56%;
     border-radius: 50%;
-    animation: geoSpin 15s linear infinite;
+    animation: geoSpin 18.2s linear infinite;
 }
 
 .hero-geometric .geo-ring:nth-child(4) {
     width: 34%;
     height: 34%;
     border-radius: 6px;
-    animation: geoSpin 12s linear infinite reverse;
+    animation: geoSpin 14.5s linear infinite reverse;
 }
 
 /* Small dots at cardinal points of outer ring */
@@ -681,7 +752,7 @@ button { font-family: var(--font); }
 
 /* Dark mode: slightly different opacity */
 [data-theme="dark"] .hero-geometric {
-    opacity: 0.12;
+    opacity: 0.077;
 }
 [data-theme="dark"] .hero-geometric .geo-ring {
     background: rgba(255,255,255,0.02);
@@ -690,10 +761,9 @@ button { font-family: var(--font); }
 /* Mobile: smaller and more transparent, or hide */
 @media (max-width: 1024px) {
     .hero-geometric {
-        width: 280px;
-        height: 280px;
-        right: 4%;
-        opacity: 0.12;
+        width: 420px;
+        height: 420px;
+        opacity: 0.077;
     }
 }
 
@@ -1872,10 +1942,28 @@ body::before {
       <a href="#contacts">Контакты</a>
     </nav>
     <div class="header-right">
-      <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Переключить тему">
-        <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </button>
+      <div class="theme-picker">
+        <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" title="Тема оформления">
+          <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <div class="theme-dropdown">
+          <div class="theme-dropdown-inner" id="themeDropdown">
+            <button class="theme-option" data-theme-value="light">
+              <span class="theme-option-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
+              <span>Светлая</span>
+            </button>
+            <button class="theme-option" data-theme-value="dark">
+              <span class="theme-option-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+              <span>Тёмная</span>
+            </button>
+            <button class="theme-option" data-theme-value="system">
+              <span class="theme-option-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
+              <span>Системная</span>
+            </button>
+          </div>
+        </div>
+      </div>
       <div class="accent-picker">
         <button class="accent-toggle" id="accentToggle" aria-label="Сменить акцент" title="Сменить цвет акцента">
           <span class="accent-dot" id="accentDot"></span>
@@ -2896,10 +2984,6 @@ body::before {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 
-  function getStoredPreference() {
-    try { return localStorage.getItem(STORAGE_KEY); } catch(e) { return null; }
-  }
-
   function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     var accentIdx = getAccentIndex();
@@ -2908,9 +2992,48 @@ body::before {
     }
   }
 
-  var stored = getStoredPreference();
-  var initialTheme = stored || getSystemPreference();
-  applyTheme(initialTheme);
+  // --- 3-mode theme system: 'light', 'dark', 'system' ---
+  var currentMode = 'system'; // track active mode
+
+  function getStoredMode() {
+    try {
+      var v = localStorage.getItem(STORAGE_KEY);
+      if (v === 'light' || v === 'dark' || v === 'system') return v;
+      return null;
+    } catch(e) { return null; }
+  }
+
+  function getEffectiveTheme(mode) {
+    if (mode === 'system' || !mode) return getSystemPreference();
+    return mode;
+  }
+
+  function updateThemeOptions(mode) {
+    var options = document.querySelectorAll('.theme-option');
+    for (var i = 0; i < options.length; i++) {
+      if (options[i].getAttribute('data-theme-value') === mode) {
+        options[i].classList.add('active');
+      } else {
+        options[i].classList.remove('active');
+      }
+    }
+  }
+
+  function applyMode(mode) {
+    currentMode = mode;
+    if (mode === 'system') {
+      try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+    } else {
+      try { localStorage.setItem(STORAGE_KEY, mode); } catch(e) {}
+    }
+    applyTheme(getEffectiveTheme(mode));
+    updateThemeOptions(mode);
+  }
+
+  // Initial load
+  var storedMode = getStoredMode();
+  currentMode = storedMode || 'system';
+  applyTheme(getEffectiveTheme(currentMode));
 
   // Apply saved accent on initial load
   var savedAccent = getAccentIndex();
@@ -2918,20 +3041,39 @@ body::before {
     applyAccent(savedAccent);
   }
 
+  // System preference change listener
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-    if (!getStoredPreference()) {
+    if (currentMode === 'system') {
       applyTheme(e.matches ? 'dark' : 'light');
     }
   });
 
   document.addEventListener('DOMContentLoaded', function() {
+    // Mark active theme option on load
+    updateThemeOptions(currentMode);
+
+    // Theme dropdown option click handlers
+    var themeDropdown = document.getElementById('themeDropdown');
+    if (themeDropdown) {
+      themeDropdown.addEventListener('click', function(e) {
+        var target = e.target.closest('.theme-option');
+        if (!target) return;
+        var value = target.getAttribute('data-theme-value');
+        if (value) applyMode(value);
+      });
+    }
+
+    // Fallback: toggle button click cycles system → light → dark → system
     var toggle = document.getElementById('themeToggle');
     if (toggle) {
       toggle.addEventListener('click', function() {
-        var current = document.documentElement.getAttribute('data-theme');
-        var next = current === 'dark' ? 'light' : 'dark';
-        applyTheme(next);
-        try { localStorage.setItem(STORAGE_KEY, next); } catch(e) {}
+        if (currentMode === 'system') {
+          applyMode('light');
+        } else if (currentMode === 'light') {
+          applyMode('dark');
+        } else {
+          applyMode('system');
+        }
       });
     }
 
