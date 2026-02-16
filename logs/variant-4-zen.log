@@ -1,0 +1,77 @@
+# Log: Create Minimalist Zen / Editorial Design Variant (variant-4-zen.html)
+
+## Step 1: Create variant-4-zen.html
+- Created complete single HTML file with Minimalist Zen / Editorial design
+- All CSS and JS inline, Google Fonts CDN for Playfair Display + Source Sans 3
+
+### Color palette implemented:
+- Light mode: bg #FAFAF9, accent sage #6B8F71, secondary dusty rose #C2A0A0, text charcoal #292524, borders #D6D3D1
+- Dark mode: bg #1C1917, text #E7E5E4, accent lighter sage #8FB896, borders #44403C
+
+### Typography:
+- Playfair Display for all headings (serif, editorial feel)
+- Source Sans 3 for body text (clean, readable)
+- line-height 1.8 for body, 1.9 for long-form text
+- Italic accents on key heading words using <em> tags
+- Generous spacing throughout
+
+### Design decisions:
+- NO card backgrounds anywhere — content flows with thin 1px dividers
+- NO shadows anywhere
+- NO rounded corners (square photo with accent-colored frame offset)
+- 160px section padding
+- Decorative serif ornament dividers between sections (thin lines + diamond character)
+- Photo: large 220px square with 1px sage accent frame offset (8px offset)
+- Stats: displayed inline as elegant text ("25+ лет опыта · 7+ лет репетиторства · 1-9 классы · 2x призёр · 4+ страны")
+- FAQ: serif bold questions with answers below, separated by thin lines only
+- Narrow 800px max-width for text sections (editorial feel)
+- Wider 1100px for about section with photo layout
+- Form inputs: bottom-border-only style (no boxes)
+- Buttons: thin outline style, fills with sage green on hover (0.5s transition)
+
+### Animations:
+- Very subtle: opacity fade-in + minimal 10px translateY
+- 1s duration with ease timing
+- Hover: color change only on links/buttons (no transform effects)
+- Counter: smooth count-up animation on stat numbers
+- FAQ accordion with smooth max-height transition
+
+### Sections preserved (all Russian text identical to index.html):
+- Header (sticky, ultra-minimal, serif logo, thin nav)
+- Hero (centered, extreme whitespace, thin line separator, outline CTA)
+- Кому подойдёт (audience list with thin dividers)
+- Результаты в цифрах (inline text stats)
+- О преподавателе (two-column with square photo + offset frame)
+- Как проходят занятия (numbered steps with serif numbers)
+- Методика (2-column grid with thin borders)
+- Формат занятий (centered block with dividers)
+- Виды занятий (3-column grid with thin borders)
+- Цены (centered block with dividers)
+- Отзывы (serif italic quotes)
+- FAQ (serif questions, accordion)
+- Форма записи (bottom-border inputs)
+- Контакты (centered, minimal)
+- Footer (dark charcoal)
+
+### Functionality preserved:
+- Dark mode toggle with localStorage persistence (separate key 'theme-preference-zen')
+- System preference detection
+- Mobile responsive with hamburger menu
+- Scroll reveal animations (IntersectionObserver)
+- Counter animation on stats section
+- FAQ accordion (one-at-a-time)
+- Form validation with submit handler
+- Background images on 3 sections only (about, method, faq) at very low opacity (0.035)
+
+### Responsive breakpoints:
+- 1024px: narrower about layout
+- 768px: single-column about, single-column methods, 2-column types, hamburger nav, 100px section padding
+- 480px: single-column types, 80px section padding
+
+## Step 2: Verification
+- All Russian text matches original index.html exactly
+- All sections present with same content
+- Same form fields and options
+- Same contact information
+- Same FAQ questions and answers
+- Dark mode, mobile responsive, counter, FAQ accordion, form — all functional

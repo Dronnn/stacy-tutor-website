@@ -1,0 +1,5 @@
+# Log: variant-4-zen.html — Restyle name + Add 5 new sections
+
+## Step 1: Add Playfair Display font import and restyle hero name
+- Adding Playfair Display to Google Fonts import
+- Splitting hero name: "Анастасия Викторовна" italic Playfair Display lighter, "Майер" bold teal non-italic

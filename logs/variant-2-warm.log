@@ -1,0 +1,111 @@
+## Log: Create variant-2-warm.html — Warm & Cozy Academic Design
+**Started:** 2026-02-15
+
+### Step 1: Read source file
+- Read all 1840 lines of index.html to extract all Russian text content, sections, and structure
+
+### Step 2: Created variant-2-warm.html
+- Single HTML file with all CSS and JS inline
+- Google Fonts CDN: DM Serif Display (headings) + DM Sans (body)
+
+### Design implementation details:
+
+**Color Palette (Light):**
+- Primary background: warm cream #FFF8F0
+- Accent: warm coral/terracotta #E07A5F
+- Secondary accent: muted gold #D4A574
+- Text: deep warm brown #2D2A26
+- Cards: white #FFFFFF with warm brown-tinted shadows (rgba(139, 90, 60, 0.06))
+- Secondary text: #6B6560, tertiary: #9A948E
+
+**Color Palette (Dark):**
+- Background: deep warm dark #1A1614
+- Surface/cards: #2A2622
+- Text: warm light #F0E6DA
+- Accent: brighter coral #F08A6F
+- Gold: #E0B88A
+
+**Typography:**
+- Headings: DM Serif Display (elegant serif) — used for hero name, section headings, card headings, stat numbers
+- Body: DM Sans (clean modern sans) — used for all body text, labels, navigation
+
+**Visual Style:**
+- Rounded corners: 12px (small), 16px (medium), 24px (large) via CSS custom properties
+- Warm shadows: rgba(139, 90, 60, ...) tint on card shadows
+- Paper-like texture: SVG noise pattern via body::after with fixed positioning, 2.5% opacity
+- Left accent border: 4px solid coral on all .card elements
+- CIS banner has gold left border instead
+- Top gradient stripe on pricing card and form wrapper
+
+**Decorative Elements (CSS only):**
+- .decor-dots: radial-gradient dot patterns (12px grid), 6% opacity
+- .decor-circle: circular outlines with gold border, 8% opacity
+- Hero: 4 decorative elements (2 circles, 2 dot patterns) at different positions
+- Sections: scattered decorative circles and dots throughout
+- All hidden on mobile (< 768px)
+
+**Hero:**
+- Full viewport with warm gradient: cream -> peach (#FFF8F0 -> #FFE8D6 -> #FFDCC8 -> #FFF0E6)
+- Dark mode gradient: #1A1614 -> #2A211A -> #1E1915
+- Photo circle with gradient border (coral -> gold -> light coral)
+- Animated gradient shift on border (8s infinite)
+- Same content: name, title, experience badge, promise, countries, CTA
+
+**Section Layout:**
+- Alternating: cream (#FFF8F0) and white (#FFFFFF)
+- Section eyebrow labels in gold (#D4A574)
+- Section headings in DM Serif Display
+
+**Background Images:**
+- Same Unsplash URLs as index.html
+- Applied via ::before pseudo-elements
+- Warm sepia-like filter: saturate(0.4) sepia(0.5)
+- Dark mode: saturate(0.2) sepia(0.3) brightness(0.5)
+- Mobile: background-attachment: scroll for iOS compatibility
+
+**Animations:**
+- Scroll reveal: fade-in + translateY(30px) with staggered delays
+- Cards: hover translateY(-6px) with enhanced shadow
+- Buttons: hover translateY(-2px) with warm glow shadow
+- Hero CTA: warmGlow keyframe animation (pulsing shadow)
+- Hero elements: staggered heroFadeIn animations
+- FAQ: smooth accordion expand (max-height transition)
+- Counter: animated count-up on scroll intersection
+
+**Stats Section:**
+- Numbers styled with DM Serif Display in coral accent color
+- Each stat in its own rounded card with shadow
+- Hover lift effect
+
+**Steps Section:**
+- Connecting gradient line (coral -> gold -> coral) between step numbers
+- Step numbers in gradient circles (coral -> gold)
+- Hidden connecting line on mobile
+
+**Form:**
+- Gradient top stripe (coral -> gold -> coral)
+- Warm cream background on inputs
+- Coral focus ring (box-shadow)
+- Coral validation highlight color
+
+**Responsive:**
+- Header: frosted glass with warm cream tint
+- Mobile hamburger menu with slide-down animation
+- All grids collapse to fewer/single columns
+- Decorative elements hidden on mobile
+- Reduced section padding on smaller screens
+
+**JavaScript:**
+- Separate localStorage key (theme-preference-warm) to not conflict with main variant
+- All same functionality: theme toggle, header scroll, mobile nav, scroll reveal, counter animation, FAQ accordion, hero parallax, form handler
+
+### Verification:
+- All Russian text content matches index.html exactly
+- All sections present: Hero, Audience, Stats, About, Steps, Method, Format, Types, Pricing, Reviews, FAQ, Form, Contacts, Footer
+- All 6 FAQ items with same questions and answers
+- Form with same 4 fields and same goal options
+- Same contact information (phone numbers, email)
+- Dark mode with toggle
+- Mobile responsive with hamburger menu
+
+**Completed:** 2026-02-15
