@@ -961,6 +961,22 @@ body::before {
   border-radius: 50%;
   background: var(--color-accent);
 }
+.resume-link {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 10px 20px;
+  border: 2px solid var(--color-accent);
+  border-radius: 8px;
+  color: var(--color-accent);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.resume-link:hover {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
 
 /* ===================== STEPS SECTION ===================== */
 .steps-container {
@@ -1419,6 +1435,14 @@ body::before {
   font-size: 0.78rem;
   background: var(--color-footer-bg);
   letter-spacing: -0.01em;
+}
+.footer-resume-link {
+  color: var(--color-footer-text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.footer-resume-link:hover {
+  color: var(--color-accent);
 }
 
 /* ===================== RESPONSIVE ===================== */
@@ -1998,6 +2022,8 @@ body::before {
           <li>Участник краевого образовательного форума «Инновационный поиск»</li>
           <li>Сертификаты в области робототехнического образования и преподавания информатики</li>
         </ul>
+
+        <a href="резюме_Майер_Анастасия_Викторовна_2025.pdf" target="_blank" class="resume-link">📄 Скачать резюме (PDF)</a>
       </div>
     </div>
   </div>
@@ -2717,7 +2743,7 @@ body::before {
 <!-- ==================== FOOTER ==================== -->
 <footer class="footer">
   <div class="container">
-    <p>&copy; 2026 Анастасия Майер — Репетитор по математике и информатике</p>
+    <p>&copy; 2026 Анастасия Майер — Репетитор по математике и информатике | <a href="резюме_Майер_Анастасия_Викторовна_2025.pdf" target="_blank" class="footer-resume-link">Резюме преподавателя</a></p>
   </div>
 </footer>
 
