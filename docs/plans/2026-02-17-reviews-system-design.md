@@ -15,6 +15,7 @@ Site on load → Google Apps Script (GET) → approved reviews only → carousel
 Columns: `Date | Name | Who (parent/student) | Grade | City | Text | Rating (1-5) | Approved (checkbox)`
 
 ## Google Apps Script (free API)
+- **Проект в Google Apps Script:** `stacy feedbacks`
 - **POST** — accepts new review, adds row with `Approved = FALSE`
 - **GET** — returns JSON with approved reviews only
 
