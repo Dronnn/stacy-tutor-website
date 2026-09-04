@@ -4019,8 +4019,11 @@ body::before {
 
           var detailParts = [];
           if (review.who) detailParts.push(review.who === 'ученик' ? 'ученик' : (review.who === 'родитель' ? (review.name && review.name.match(/а$/i) ? 'мама ученика' : 'родитель') : review.who));
-          if (review.grade) detailParts.push(review.grade);
-          if (review.city) detailParts.push(review.city);
+          var gradeContainsDate = review.grade && isReviewDateValue(review.grade);
+          if (review.grade && !gradeContainsDate) detailParts.push(String(review.grade));
+          if (review.city) detailParts.push(formatReviewDetail(review.city));
+          var reviewDate = review.date || (gradeContainsDate ? review.grade : '');
+          if (reviewDate) detailParts.push(formatReviewDetail(reviewDate));
 
           card.innerHTML =
             '<div class="review-stars">' + stars + '</div>' +
@@ -4046,6 +4049,29 @@ body::before {
     var div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
+  }
+
+  function formatReviewDetail(value) {
+    var text = String(value);
+    if (!isReviewDateValue(text)) return text;
+
+    if (/^\d{2}\.\d{2}\.\d{4}$/.test(text)) return text;
+
+    var date = new Date(text);
+    if (isNaN(date.getTime())) return text;
+
+    return new Intl.DateTimeFormat('ru-RU', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      timeZone: 'Asia/Yerevan'
+    }).format(date);
+  }
+
+  function isReviewDateValue(value) {
+    var text = String(value);
+    return /^\d{2}\.\d{2}\.\d{4}$/.test(text) ||
+      /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.test(text);
   }
 
   function initCarouselArrows() {
