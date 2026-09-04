@@ -1285,6 +1285,53 @@ body::before {
   font-weight: 600;
 }
 
+/* ===================== PHOTO GALLERY ===================== */
+.photo-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 18px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.photo-gallery-item {
+  aspect-ratio: 4 / 3;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border-card);
+  border-radius: 16px;
+  background: var(--color-surface);
+  box-shadow: 0 2px 12px var(--color-card-shadow);
+  cursor: zoom-in;
+}
+.photo-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-smooth), filter var(--transition-smooth);
+}
+.photo-gallery-item:hover img { transform: scale(1.04); }
+.photo-gallery-item:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.photo-modal-dialog {
+  position: relative;
+  width: min(1100px, 100%);
+  max-height: calc(100vh - 56px);
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  background: var(--color-surface);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+.photo-modal-image {
+  display: block;
+  width: 100%;
+  max-height: calc(100vh - 92px);
+  object-fit: contain;
+  border-radius: 12px;
+}
+
 /* ===================== STEPS SECTION ===================== */
 .steps-container {
   display: grid;
@@ -2611,13 +2658,13 @@ body::before {
     <div class="certificates-grid">
       <article class="card certificate-card reveal reveal-delay-1">
         <button class="certificate-preview" type="button"
-          data-src="certs/diplom.jpeg"
+          data-src="certs/1-diplom.jpeg"
           data-alt="Диплом Анастасии Викторовны о высшем педагогическом образовании"
           data-title="Диплом о высшем педагогическом образовании"
           data-issuer="Красноярский государственный педагогический университет"
           data-meta="Учитель информатики и экономики · 28 июня 2000 года"
           aria-label="Увеличить диплом о высшем педагогическом образовании">
-          <img src="certs/diplom.jpeg" alt="Диплом Анастасии Викторовны о высшем педагогическом образовании" loading="lazy" decoding="async">
+          <img src="certs/1-diplom.jpeg" alt="Диплом Анастасии Викторовны о высшем педагогическом образовании" loading="lazy" decoding="async">
         </button>
         <div class="certificate-details">
           <h3>Диплом о высшем педагогическом образовании</h3>
@@ -2631,33 +2678,13 @@ body::before {
       </article>
       <article class="card certificate-card reveal reveal-delay-2">
         <button class="certificate-preview" type="button"
-          data-src="certs/cert-crit-thinking.jpg"
-          data-alt="Сертификат об окончании курса «Архитектура критического мышления»"
-          data-title="Архитектура критического мышления"
-          data-issuer="Сингапурская компания MentorEd International Pte Ltd"
-          data-meta="Онлайн-курс · 48 часов · 20 сентября 2026 года"
-          aria-label="Увеличить сертификат «Архитектура критического мышления»">
-          <img src="certs/cert-crit-thinking.jpg" alt="Сертификат об окончании курса «Архитектура критического мышления»" loading="lazy" decoding="async">
-        </button>
-        <div class="certificate-details">
-          <h3>Архитектура критического мышления</h3>
-          <div class="certificate-issuer">
-            <span>Выдан:</span>
-            <strong>Сингапурская компания MentorEd International Pte Ltd</strong>
-          </div>
-          <p class="certificate-meta">Онлайн-курс · 48 часов · 20 сентября 2026 года</p>
-          <span class="certificate-hint">Нажмите на изображение, чтобы увеличить</span>
-        </div>
-      </article>
-      <article class="card certificate-card reveal reveal-delay-3">
-        <button class="certificate-preview" type="button"
-          data-src="certs/cert-igralochka.jpg"
+          data-src="certs/2-cert-igralochka.jpg"
           data-alt="Удостоверение о повышении квалификации по курсу «Игралочка»"
           data-title="Математическое развитие дошкольников в курсе «Игралочка»"
           data-issuer="НОУ «Институт системно-деятельностной педагогики». Научный руководитель института: Л. Г. Петерсон"
           data-meta="Повышение квалификации · 36 часов · 5 июня 2026 года"
           aria-label="Увеличить удостоверение по курсу «Игралочка»">
-          <img src="certs/cert-igralochka.jpg" alt="Удостоверение о повышении квалификации по курсу «Игралочка»" loading="lazy" decoding="async">
+          <img src="certs/2-cert-igralochka.jpg" alt="Удостоверение о повышении квалификации по курсу «Игралочка»" loading="lazy" decoding="async">
         </button>
         <div class="certificate-details">
           <h3>Математическое развитие дошкольников в курсе «Игралочка»</h3>
@@ -2669,6 +2696,50 @@ body::before {
           <p class="certificate-meta">Повышение квалификации · 36 часов · 5 июня 2026 года</p>
           <span class="certificate-hint">Нажмите на изображение, чтобы увеличить</span>
         </div>
+      </article>
+      <article class="card certificate-card reveal reveal-delay-3">
+        <button class="certificate-preview" type="button"
+          data-src="certs/3-cert-crit-thinking.jpg"
+          data-alt="Сертификат об окончании курса «Архитектура критического мышления»"
+          data-title="Архитектура критического мышления"
+          data-issuer="Сингапурская компания MentorEd International Pte Ltd"
+          data-meta="Онлайн-курс · 48 часов · 20 сентября 2026 года"
+          aria-label="Увеличить сертификат «Архитектура критического мышления»">
+          <img src="certs/3-cert-crit-thinking.jpg" alt="Сертификат об окончании курса «Архитектура критического мышления»" loading="lazy" decoding="async">
+        </button>
+        <div class="certificate-details">
+          <h3>Архитектура критического мышления</h3>
+          <div class="certificate-issuer">
+            <span>Выдан:</span>
+            <strong>Сингапурская компания MentorEd International Pte Ltd</strong>
+          </div>
+          <p class="certificate-meta">Онлайн-курс · 48 часов · 20 сентября 2026 года</p>
+          <span class="certificate-hint">Нажмите на изображение, чтобы увеличить</span>
+        </div>
+      </article>
+      <article class="card certificate-card reveal reveal-delay-1">
+        <button class="certificate-preview" type="button" data-src="certs/4-cert-uchitel-goda.jpg" data-alt="Диплом призёра конкурса «Учитель года Кубани»" data-title="Призёр конкурса «Учитель года Кубани»" data-issuer="Управление образования" data-meta="Муниципальный этап · 17 марта 2017 года" aria-label="Увеличить диплом призёра конкурса «Учитель года Кубани»"><img src="certs/4-cert-uchitel-goda.jpg" alt="Диплом призёра конкурса «Учитель года Кубани»" loading="lazy" decoding="async"></button>
+        <div class="certificate-details"><h3>Призёр конкурса «Учитель года Кубани»</h3><div class="certificate-issuer"><span>Выдан:</span><strong>Управление образования</strong></div><p class="certificate-meta">Муниципальный этап · 17 марта 2017 года</p><span class="certificate-hint">Нажмите, чтобы увеличить</span></div>
+      </article>
+      <article class="card certificate-card reveal reveal-delay-2">
+        <button class="certificate-preview" type="button" data-src="certs/5-Diplom Innovatsionnyy poisk.jpg" data-alt="Диплом участника форума «Инновационный поиск»" data-title="Краевой форум «Инновационный поиск»" data-issuer="Краснодарский краевой институт дополнительного профессионального педагогического образования" data-meta="Диплом участника · Краснодар · 2014 год" aria-label="Увеличить диплом форума «Инновационный поиск»"><img src="certs/5-Diplom Innovatsionnyy poisk.jpg" alt="Диплом участника форума «Инновационный поиск»" loading="lazy" decoding="async"></button>
+        <div class="certificate-details"><h3>Краевой форум «Инновационный поиск»</h3><div class="certificate-issuer"><span>Выдан:</span><strong>Краснодарский краевой институт дополнительного педагогического образования</strong></div><p class="certificate-meta">Диплом участника · 2014 год</p><span class="certificate-hint">Нажмите, чтобы увеличить</span></div>
+      </article>
+      <article class="card certificate-card reveal reveal-delay-3">
+        <button class="certificate-preview" type="button" data-src="certs/6-Robofest-Kuban.jpg" data-alt="Сертификат фестиваля «РобоФест-Кубань»" data-title="I краевой фестиваль «РобоФест-Кубань»" data-issuer="Краснодарский краевой институт дополнительного профессионального педагогического образования" data-meta="6–7 ноября 2014 года · Краснодар" aria-label="Увеличить сертификат «РобоФест-Кубань»"><img src="certs/6-Robofest-Kuban.jpg" alt="Сертификат фестиваля «РобоФест-Кубань»" loading="lazy" decoding="async"></button>
+        <div class="certificate-details"><h3>I краевой фестиваль «РобоФест-Кубань»</h3><div class="certificate-issuer"><span>Выдан:</span><strong>Краснодарский краевой институт дополнительного педагогического образования</strong></div><p class="certificate-meta">6–7 ноября 2014 года · Краснодар</p><span class="certificate-hint">Нажмите, чтобы увеличить</span></div>
+      </article>
+      <article class="card certificate-card reveal reveal-delay-1">
+        <button class="certificate-preview" type="button" data-src="certs/7-Robofest-Ust-Labinsk.jpg" data-alt="Сертификат фестиваля «Робофест Усть-Лабинск 2015»" data-title="Робофест Усть-Лабинск 2015" data-issuer="Оргкомитет фестиваля" data-meta="Направление «Hello, robot!» · январь 2015 года" aria-label="Увеличить сертификат «Робофест Усть-Лабинск 2015»"><img src="certs/7-Robofest-Ust-Labinsk.jpg" alt="Сертификат фестиваля «Робофест Усть-Лабинск 2015»" loading="lazy" decoding="async"></button>
+        <div class="certificate-details"><h3>Робофест Усть-Лабинск 2015</h3><div class="certificate-issuer"><span>Выдан:</span><strong>Оргкомитет фестиваля</strong></div><p class="certificate-meta">Направление «Hello, robot!» · январь 2015 года</p><span class="certificate-hint">Нажмите, чтобы увеличить</span></div>
+      </article>
+      <article class="card certificate-card reveal reveal-delay-2">
+        <button class="certificate-preview" type="button" data-src="certs/8-Sertifikat-Kuban-interaktivnaya.jpg" data-alt="Сертификат фестиваля «Кубань интерактивная»" data-title="Краевой фестиваль «Кубань интерактивная»" data-issuer="Краснодарский краевой институт дополнительного профессионального педагогического образования" data-meta="Номинация «Лучший ЭОР начальных классов» · 28 ноября 2014 года" aria-label="Увеличить сертификат «Кубань интерактивная»"><img src="certs/8-Sertifikat-Kuban-interaktivnaya.jpg" alt="Сертификат фестиваля «Кубань интерактивная»" loading="lazy" decoding="async"></button>
+        <div class="certificate-details"><h3>Краевой фестиваль «Кубань интерактивная»</h3><div class="certificate-issuer"><span>Выдан:</span><strong>Краснодарский краевой институт дополнительного профессионального педагогического образования</strong></div><p class="certificate-meta">Номинация «Лучший ЭОР начальных классов» · 28 ноября 2014 года</p><span class="certificate-hint">Нажмите, чтобы увеличить</span></div>
+      </article>
+      <article class="card certificate-card reveal reveal-delay-3">
+        <button class="certificate-preview" type="button" data-src="certs/9-Sertifikat-kursy-Hello-Robot.jpg" data-alt="Сертификат обучения «Hello, robot!»" data-title="Обучение по направлению «Hello, robot!»" data-issuer="Краснодарский краевой институт дополнительного профессионального педагогического образования" data-meta="24 академических часа · 24–27 сентября 2014 года" aria-label="Увеличить сертификат «Hello, robot!»"><img src="certs/9-Sertifikat-kursy-Hello-Robot.jpg" alt="Сертификат обучения «Hello, robot!»" loading="lazy" decoding="async"></button>
+        <div class="certificate-details"><h3>Обучение по направлению «Hello, robot!»</h3><div class="certificate-issuer"><span>Выдан:</span><strong>Краснодарский краевой институт дополнительного профессионального педагогического образования</strong></div><p class="certificate-meta">24 академических часа · 24–27 сентября 2014 года</p><span class="certificate-hint">Нажмите, чтобы увеличить</span></div>
       </article>
     </div>
   </div>
@@ -3385,6 +3456,30 @@ body::before {
   </div>
 </section>
 
+<!-- ==================== PHOTO GALLERY ==================== -->
+<section class="section section--gray" id="photo-gallery">
+  <div class="container">
+    <div class="section-heading-glass-wrap"><p class="section-eyebrow reveal section-heading-glass">В работе</p></div>
+    <div class="section-heading-glass-wrap"><h2 class="section-heading reveal section-heading-glass">Фотогалерея</h2></div>
+    <div class="section-heading-glass-wrap"><p class="section-subheading reveal section-heading-glass">Учебные проекты, соревнования и достижения учеников</p></div>
+    <div class="photo-gallery-grid">
+      <button class="photo-gallery-item reveal reveal-delay-1" type="button" data-src="photo-galery/photo-1.jpg" data-alt="Анастасия Викторовна с учениками на фестивале робототехники" aria-label="Увеличить фото 1"><img src="photo-galery/photo-1.jpg" alt="Анастасия Викторовна с учениками на фестивале робототехники" loading="lazy" decoding="async"></button>
+      <button class="photo-gallery-item reveal reveal-delay-2" type="button" data-src="photo-galery/photo-2.jpg" data-alt="Ученики с дипломами фестиваля робототехники" aria-label="Увеличить фото 2"><img src="photo-galery/photo-2.jpg" alt="Ученики с дипломами фестиваля робототехники" loading="lazy" decoding="async"></button>
+      <button class="photo-gallery-item reveal reveal-delay-3" type="button" data-src="photo-galery/photo-3.jpg" data-alt="Ученик с исследовательским проектом" aria-label="Увеличить фото 3"><img src="photo-galery/photo-3.jpg" alt="Ученик с исследовательским проектом" loading="lazy" decoding="async"></button>
+      <button class="photo-gallery-item reveal reveal-delay-1" type="button" data-src="photo-galery/photo-4.jpg" data-alt="Ученики на конкурсе «Я — исследователь»" aria-label="Увеличить фото 4"><img src="photo-galery/photo-4.jpg" alt="Ученики на конкурсе «Я — исследователь»" loading="lazy" decoding="async"></button>
+      <button class="photo-gallery-item reveal reveal-delay-2" type="button" data-src="photo-galery/photo-5.jpg" data-alt="Творческий школьный проект" aria-label="Увеличить фото 5"><img src="photo-galery/photo-5.jpg" alt="Творческий школьный проект" loading="lazy" decoding="async"></button>
+    </div>
+  </div>
+</section>
+
+<div class="certificate-modal" id="photoModal" role="dialog" aria-modal="true" aria-label="Просмотр фотографии" hidden>
+  <button class="certificate-modal-backdrop" type="button" aria-label="Закрыть фотографию"></button>
+  <div class="photo-modal-dialog">
+    <button class="certificate-modal-close" type="button" aria-label="Закрыть">&times;</button>
+    <img class="photo-modal-image" id="photoModalImage" src="" alt="">
+  </div>
+</div>
+
 <!-- ==================== FOOTER ==================== -->
 <footer class="footer">
   <div class="container">
@@ -3789,6 +3884,38 @@ body::before {
   if (certificateModalBackdrop) certificateModalBackdrop.addEventListener('click', closeCertificateModal);
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeCertificateModal();
+  });
+
+  /* ========== PHOTO GALLERY ========== */
+  var photoButtons = document.querySelectorAll('.photo-gallery-item');
+  var photoModal = document.getElementById('photoModal');
+  var photoModalImage = document.getElementById('photoModalImage');
+  var photoModalClose = photoModal ? photoModal.querySelector('.certificate-modal-close') : null;
+  var photoModalBackdrop = photoModal ? photoModal.querySelector('.certificate-modal-backdrop') : null;
+  var photoLastTrigger = null;
+
+  function closePhotoModal() {
+    if (!photoModal || photoModal.hidden) return;
+    photoModal.hidden = true;
+    document.body.style.overflow = '';
+    if (photoLastTrigger) photoLastTrigger.focus();
+  }
+
+  photoButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      photoLastTrigger = button;
+      photoModalImage.src = button.dataset.src;
+      photoModalImage.alt = button.dataset.alt;
+      photoModal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      photoModalClose.focus();
+    });
+  });
+
+  if (photoModalClose) photoModalClose.addEventListener('click', closePhotoModal);
+  if (photoModalBackdrop) photoModalBackdrop.addEventListener('click', closePhotoModal);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePhotoModal();
   });
 
   /* ========== FAQ ACCORDION ========== */
