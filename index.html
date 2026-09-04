@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Анастасия Майер — Репетитор по математике и информатике, 1–11 класс</title>
-<meta name="description" content="Репетитор по математике и информатике для 1–11 классов. Действующий учитель с 25-летним опытом. Подготовка к ВПР, ОГЭ и ЕГЭ. Программирование на Python и Pascal.">
+<meta name="description" content="Репетитор по математике и информатике для 1–11 классов. Действующий учитель с опытом более 25 лет. Подготовка к ВПР, ОГЭ и ЕГЭ. Программирование на Python и Pascal.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -142,6 +142,7 @@ button { font-family: var(--font); }
 .section-bg--audience::before { background-image: url('images/bg-chalkboard.jpg'); }
 .section-bg--stats::before { background-image: url('images/bg-math.jpg'); }
 .section-bg--about::before { background-image: url('images/bg-teacher.jpg'); }
+.section-bg--certificates::before { background-image: url('images/bg-graduation.jpg'); }
 .section-bg--steps::before { background-image: url('images/bg-school.jpg'); }
 .section-bg--method::before { background-image: url('images/bg-child.jpg'); }
 .section-bg--programs::before { background-image: url('images/bg-library.jpg'); }
@@ -1119,6 +1120,171 @@ body::before {
   color: var(--color-bg);
 }
 
+/* ===================== CERTIFICATES SECTION ===================== */
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.certificate-card {
+  padding: 18px;
+}
+.certificate-preview {
+  width: 100%;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-bg-alt) 92%, var(--color-accent) 8%);
+  cursor: zoom-in;
+}
+.certificate-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform var(--transition-smooth);
+}
+.certificate-preview:hover img {
+  transform: scale(1.03);
+}
+.certificate-preview:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.certificate-details {
+  padding: 22px 8px 6px;
+}
+.certificate-details h3 {
+  color: var(--color-text);
+  font-size: 1.08rem;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+.certificate-issuer {
+  margin-top: 14px;
+}
+.certificate-issuer span {
+  margin-right: 5px;
+  color: var(--color-text-tertiary);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.certificate-issuer strong {
+  color: var(--color-text);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.certificate-issuer-note {
+  display: block;
+  margin-top: 6px;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+.certificate-meta {
+  margin-top: 8px;
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+.certificate-hint {
+  display: block;
+  margin-top: 14px;
+  color: var(--color-accent);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.certificate-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+}
+.certificate-modal[hidden] {
+  display: none;
+}
+.certificate-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(0, 0, 0, 0.76);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: zoom-out;
+}
+.certificate-modal-dialog {
+  position: relative;
+  width: min(1180px, 100%);
+  max-height: calc(100vh - 56px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  background: var(--color-surface);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+}
+.certificate-modal-image-wrap {
+  min-height: 520px;
+  max-height: calc(100vh - 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: color-mix(in srgb, var(--color-bg-alt) 94%, var(--color-accent) 6%);
+}
+.certificate-modal-image {
+  width: 100%;
+  height: 100%;
+  max-height: calc(100vh - 96px);
+  object-fit: contain;
+}
+.certificate-modal-details {
+  padding: 52px 28px 32px;
+  overflow-y: auto;
+}
+.certificate-modal-details h3 {
+  margin-top: 12px;
+  color: var(--color-text);
+  font-size: 1.35rem;
+  line-height: 1.35;
+}
+.certificate-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+  color: var(--color-text);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.certificate-modal-close:hover {
+  background: var(--color-accent);
+  color: #fff;
+}
+.certificate-modal-open {
+  display: inline-block;
+  margin-top: 24px;
+  color: var(--color-accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
 /* ===================== STEPS SECTION ===================== */
 .steps-container {
   display: grid;
@@ -1835,6 +2001,14 @@ body::before {
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .about-photo-wrap { position: static; }
   .about-photo { width: 230px; height: 230px; }
+  .certificates-grid { grid-template-columns: 1fr; max-width: 620px; }
+  .certificate-preview { height: min(72vw, 340px); }
+  .certificate-modal { padding: 12px; }
+  .certificate-modal-dialog { grid-template-columns: 1fr; max-height: calc(100vh - 24px); overflow-y: auto; }
+  .certificate-modal-image-wrap { min-height: 0; height: min(118vw, 560px); }
+  .certificate-modal-image { max-height: 100%; }
+  .certificate-modal-details { padding: 28px 22px 32px; }
+  .certificate-modal-close { position: fixed; top: 22px; right: 22px; background: rgba(0, 0, 0, 0.68); color: #fff; }
   .steps-container {
     grid-template-columns: 1fr;
     gap: 32px;
@@ -2146,6 +2320,7 @@ body::before {
       <a href="#about">Обо мне</a>
       <a href="#types">Занятия</a>
       <a href="#method">Методика</a>
+      <a href="#certificates">Сертификаты</a>
       <a href="#pricing">Цены</a>
       <a href="#reviews">Отзывы</a>
       <a href="#contacts">Контакты</a>
@@ -2212,7 +2387,7 @@ body::before {
     <p class="hero-title">Репетитор по математике и информатике, 1–11 класс</p>
     <div class="hero-experience">
       <span class="hero-experience-dot"></span>
-      Действующий учитель с 25-летним опытом
+      Действующий учитель с опытом более 25 лет
     </div>
     <p class="hero-promise">Помогу закрыть пробелы в математике, освоить программирование и подготовиться к ВПР, ОГЭ и ЕГЭ. Объясняю просто и на понятных примерах.</p>
     <div class="hero-countries">
@@ -2313,7 +2488,7 @@ body::before {
     <div class="section-heading-glass-wrap"><p class="section-subheading reveal section-heading-glass">За годы преподавания — опыт, который работает на каждого ученика</p></div>
     <div class="stats-grid">
       <div class="stat-item reveal reveal-delay-1">
-        <div class="stat-number" data-target="27" data-suffix="+">0</div>
+        <div class="stat-number" data-target="25" data-suffix="+">0</div>
         <div class="stat-label">&#128218; лет в образовании</div>
       </div>
       <div class="stat-item reveal reveal-delay-2">
@@ -2365,7 +2540,7 @@ body::before {
         </div>
       </div>
       <div class="about-text about-text-backdrop reveal reveal-delay-1">
-        <p>Меня зовут Анастасия Викторовна Майер. Я преподаю математику и информатику больше 27 лет — в школе, в образовательных центрах и как частный репетитор. Информатику преподаю с 1999 года — больше 27 лет опыта. Владею Python, Pascal, основами робототехники. Веду системную подготовку к ОГЭ и ЕГЭ по обоим предметам. Живу в Ереване (Армения), работаю онлайн с русскоязычными учениками из России, Армении, Казахстана, Кыргызстана и других стран СНГ.</p>
+        <p>Меня зовут Анастасия Викторовна Майер. Я преподаю математику и информатику больше 25 лет — в школе, в образовательных центрах и как частный репетитор. Информатику преподаю с 1999 года — больше 25 лет опыта. Владею Python, Pascal, основами робототехники. Веду системную подготовку к ОГЭ и ЕГЭ по обоим предметам. Живу в Ереване (Армения), работаю онлайн с русскоязычными учениками из России, Армении, Казахстана, Кыргызстана и других стран СНГ.</p>
 
         <div class="about-label">Образование</div>
         <p>Красноярский государственный педагогический университет им.&nbsp;В.П.&nbsp;Астафьева, факультет математики и информатики, специальность — учитель информатики и экономики. Преподаватель первой категории.</p>
@@ -2398,6 +2573,78 @@ body::before {
     </div>
   </div>
 </section>
+
+<!-- ==================== СЕРТИФИКАТЫ ==================== -->
+<section class="section section--white section-bg section-bg--certificates" id="certificates">
+  <div class="container">
+    <div class="section-heading-glass-wrap"><p class="section-eyebrow reveal section-heading-glass">Квалификация</p></div>
+    <div class="section-heading-glass-wrap"><h2 class="section-heading reveal section-heading-glass">Сертификаты</h2></div>
+    <div class="section-heading-glass-wrap"><p class="section-subheading reveal section-heading-glass">Постоянно развиваюсь как педагог и осваиваю новые образовательные методики</p></div>
+    <div class="certificates-grid">
+      <article class="card certificate-card reveal reveal-delay-1">
+        <button class="certificate-preview" type="button"
+          data-src="certs/cert-crit-thinking.jpg"
+          data-alt="Сертификат об окончании курса «Архитектура критического мышления»"
+          data-title="Архитектура критического мышления"
+          data-issuer="Сингапурская компания MentorEd International Pte Ltd"
+          data-meta="Онлайн-курс · 48 часов · 20 сентября 2026 года"
+          aria-label="Увеличить сертификат «Архитектура критического мышления»">
+          <img src="certs/cert-crit-thinking.jpg" alt="Сертификат об окончании курса «Архитектура критического мышления»" loading="lazy" decoding="async">
+        </button>
+        <div class="certificate-details">
+          <h3>Архитектура критического мышления</h3>
+          <div class="certificate-issuer">
+            <span>Выдан:</span>
+            <strong>Сингапурская компания MentorEd International Pte Ltd</strong>
+          </div>
+          <p class="certificate-meta">Онлайн-курс · 48 часов · 20 сентября 2026 года</p>
+          <span class="certificate-hint">Нажмите на изображение, чтобы увеличить</span>
+        </div>
+      </article>
+      <article class="card certificate-card reveal reveal-delay-2">
+        <button class="certificate-preview" type="button"
+          data-src="certs/cert-igralochka.jpg"
+          data-alt="Удостоверение о повышении квалификации по курсу «Игралочка»"
+          data-title="Математическое развитие дошкольников в курсе «Игралочка»"
+          data-issuer="НОУ «Институт системно-деятельностной педагогики». Научный руководитель института: Л. Г. Петерсон"
+          data-meta="Повышение квалификации · 36 часов · 5 июня 2026 года"
+          aria-label="Увеличить удостоверение по курсу «Игралочка»">
+          <img src="certs/cert-igralochka.jpg" alt="Удостоверение о повышении квалификации по курсу «Игралочка»" loading="lazy" decoding="async">
+        </button>
+        <div class="certificate-details">
+          <h3>Математическое развитие дошкольников в курсе «Игралочка»</h3>
+          <div class="certificate-issuer">
+            <span>Выдан:</span>
+            <strong>НОУ «Институт системно-деятельностной педагогики»</strong>
+            <small class="certificate-issuer-note">Научный руководитель института: Л. Г. Петерсон</small>
+          </div>
+          <p class="certificate-meta">Повышение квалификации · 36 часов · 5 июня 2026 года</p>
+          <span class="certificate-hint">Нажмите на изображение, чтобы увеличить</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="certificate-modal" id="certificateModal" role="dialog" aria-modal="true" aria-labelledby="certificateModalTitle" hidden>
+  <button class="certificate-modal-backdrop" type="button" aria-label="Закрыть просмотр сертификата"></button>
+  <div class="certificate-modal-dialog">
+    <button class="certificate-modal-close" type="button" aria-label="Закрыть">&times;</button>
+    <div class="certificate-modal-image-wrap">
+      <img class="certificate-modal-image" id="certificateModalImage" src="" alt="">
+    </div>
+    <div class="certificate-modal-details">
+      <span class="certificate-details-label">Сертификат</span>
+      <h3 id="certificateModalTitle"></h3>
+      <div class="certificate-issuer">
+        <span>Выдан:</span>
+        <strong id="certificateModalIssuer"></strong>
+      </div>
+      <p class="certificate-meta" id="certificateModalMeta"></p>
+      <a class="certificate-modal-open" id="certificateModalOriginal" href="" target="_blank" rel="noopener">Открыть оригинал в новой вкладке</a>
+    </div>
+  </div>
+</div>
 
 <!-- ==================== КАК ПРОХОДЯТ ЗАНЯТИЯ ==================== -->
 <section class="section section--white section-bg section-bg--steps" id="steps">
@@ -2454,34 +2701,48 @@ body::before {
         </div>
       </div>
       <div class="card method-card reveal reveal-delay-4">
+        <div class="method-icon"><span>&#129504;</span></div>
+        <div>
+          <h4>Развитие критического мышления</h4>
+          <p>Учу анализировать условие, выдвигать гипотезы и обосновывать решение, а не просто угадывать ответ</p>
+        </div>
+      </div>
+      <div class="card method-card reveal reveal-delay-5">
         <div class="method-icon"><span>&#9989;</span></div>
         <div>
           <h4>Регулярные мини-проверки</h4>
           <p>Короткие тесты, чтобы видеть, что усвоено</p>
         </div>
       </div>
-      <div class="card method-card reveal reveal-delay-5">
+      <div class="card method-card reveal reveal-delay-6">
         <div class="method-icon"><span>&#128200;</span></div>
         <div>
           <h4>Разбор ошибок</h4>
           <p>Каждая ошибка становится точкой роста</p>
         </div>
       </div>
-      <div class="card method-card reveal reveal-delay-6">
+      <div class="card method-card reveal reveal-delay-7">
         <div class="method-icon"><span>&#128218;</span></div>
         <div>
           <h4>Работа по школьным УМК</h4>
           <p>Петерсон, Виленкин, Макарычев, Атанасян — ребёнок глубже понимает свою программу</p>
         </div>
       </div>
-      <div class="card method-card reveal reveal-delay-7">
+      <div class="card method-card reveal reveal-delay-8">
+        <div class="method-icon"><span>&#129513;</span></div>
+        <div>
+          <h4>Системно-деятельностный подход</h4>
+          <p>Ребёнок не получает готовое правило, а открывает его через вопросы, задачи и практическую работу</p>
+        </div>
+      </div>
+      <div class="card method-card reveal reveal-delay-9">
         <div class="method-icon"><span>&#129302;</span></div>
         <div>
           <h4>Современные технологии</h4>
           <p>Использую интерактивные инструменты, онлайн-тренажёры и практические задачи. Опыт разработки образовательного контента для Яндекса.</p>
         </div>
       </div>
-      <div class="card method-card reveal">
+      <div class="card method-card reveal reveal-delay-10">
         <div class="method-icon"><span>&#128161;</span></div>
         <div>
           <h4>Практика с первого урока</h4>
@@ -2730,7 +2991,7 @@ body::before {
       </div>
       <div class="card myth-card reveal reveal-delay-3">
         <h3>&#10060; «В 9 классе уже поздно»</h3>
-        <p>За 27 лет я видела десятки случаев, когда подготовка за 5–6 месяцев до ОГЭ давала прирост в 2–3 раза. Главное — начать.</p>
+        <p>За 25+ лет я видела десятки случаев, когда подготовка за 5–6 месяцев до ОГЭ давала прирост в 2–3 раза. Главное — начать.</p>
       </div>
       <div class="card myth-card reveal reveal-delay-4">
         <h3>&#10060; «Репетитор нужен только двоечникам»</h3>
@@ -3440,6 +3701,47 @@ body::before {
   if (statsSection) {
     counterObserver.observe(statsSection);
   }
+
+  /* ========== CERTIFICATES GALLERY ========== */
+  var certificateButtons = document.querySelectorAll('.certificate-preview');
+  var certificateModal = document.getElementById('certificateModal');
+  var certificateModalImage = document.getElementById('certificateModalImage');
+  var certificateModalTitle = document.getElementById('certificateModalTitle');
+  var certificateModalIssuer = document.getElementById('certificateModalIssuer');
+  var certificateModalMeta = document.getElementById('certificateModalMeta');
+  var certificateModalOriginal = document.getElementById('certificateModalOriginal');
+  var certificateModalClose = document.querySelector('.certificate-modal-close');
+  var certificateModalBackdrop = document.querySelector('.certificate-modal-backdrop');
+  var certificateLastTrigger = null;
+
+  function closeCertificateModal() {
+    if (!certificateModal || certificateModal.hidden) return;
+    certificateModal.hidden = true;
+    document.body.style.overflow = '';
+    if (certificateLastTrigger) certificateLastTrigger.focus();
+  }
+
+  certificateButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      if (!certificateModal) return;
+      certificateLastTrigger = button;
+      certificateModalImage.src = button.dataset.src;
+      certificateModalImage.alt = button.dataset.alt;
+      certificateModalTitle.textContent = button.dataset.title;
+      certificateModalIssuer.textContent = button.dataset.issuer;
+      certificateModalMeta.textContent = button.dataset.meta;
+      certificateModalOriginal.href = button.dataset.src;
+      certificateModal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      certificateModalClose.focus();
+    });
+  });
+
+  if (certificateModalClose) certificateModalClose.addEventListener('click', closeCertificateModal);
+  if (certificateModalBackdrop) certificateModalBackdrop.addEventListener('click', closeCertificateModal);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeCertificateModal();
+  });
 
   /* ========== FAQ ACCORDION ========== */
   var faqItems = document.querySelectorAll('.faq-item');
