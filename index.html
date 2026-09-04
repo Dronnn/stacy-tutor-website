@@ -1123,7 +1123,7 @@ body::before {
 /* ===================== CERTIFICATES SECTION ===================== */
 .certificates-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
   gap: 24px;
   max-width: 1120px;
   margin: 0 auto;
@@ -1890,6 +1890,34 @@ body::before {
   transform: scale(1.01);
 }
 .btn-submit:active { transform: scale(0.99); }
+.btn-submit:disabled {
+  opacity: 0.7;
+  cursor: wait;
+  transform: none;
+}
+.form-message {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+}
+.form-message[hidden] { display: none; }
+.form-message--success {
+  color: #176b3a;
+  background: rgba(38, 166, 91, 0.12);
+  border-color: rgba(38, 166, 91, 0.3);
+}
+.form-message--error {
+  color: #a12a2a;
+  background: rgba(220, 53, 69, 0.1);
+  border-color: rgba(220, 53, 69, 0.28);
+}
+[data-theme="dark"] .form-message--success { color: #82d9a8; }
+[data-theme="dark"] .form-message--error { color: #ff9b9b; }
 
 /* ===================== CONTACTS SECTION ===================== */
 .contacts-grid {
@@ -2583,6 +2611,26 @@ body::before {
     <div class="certificates-grid">
       <article class="card certificate-card reveal reveal-delay-1">
         <button class="certificate-preview" type="button"
+          data-src="certs/diplom.jpeg"
+          data-alt="Диплом Анастасии Викторовны о высшем педагогическом образовании"
+          data-title="Диплом о высшем педагогическом образовании"
+          data-issuer="Красноярский государственный педагогический университет"
+          data-meta="Учитель информатики и экономики · 28 июня 2000 года"
+          aria-label="Увеличить диплом о высшем педагогическом образовании">
+          <img src="certs/diplom.jpeg" alt="Диплом Анастасии Викторовны о высшем педагогическом образовании" loading="lazy" decoding="async">
+        </button>
+        <div class="certificate-details">
+          <h3>Диплом о высшем педагогическом образовании</h3>
+          <div class="certificate-issuer">
+            <span>Выдан:</span>
+            <strong>Красноярский государственный педагогический университет</strong>
+          </div>
+          <p class="certificate-meta">Учитель информатики и экономики · 28 июня 2000 года</p>
+          <span class="certificate-hint">Нажмите на изображение, чтобы увеличить</span>
+        </div>
+      </article>
+      <article class="card certificate-card reveal reveal-delay-2">
+        <button class="certificate-preview" type="button"
           data-src="certs/cert-crit-thinking.jpg"
           data-alt="Сертификат об окончании курса «Архитектура критического мышления»"
           data-title="Архитектура критического мышления"
@@ -2601,7 +2649,7 @@ body::before {
           <span class="certificate-hint">Нажмите на изображение, чтобы увеличить</span>
         </div>
       </article>
-      <article class="card certificate-card reveal reveal-delay-2">
+      <article class="card certificate-card reveal reveal-delay-3">
         <button class="certificate-preview" type="button"
           data-src="certs/cert-igralochka.jpg"
           data-alt="Удостоверение о повышении квалификации по курсу «Игралочка»"
@@ -3266,10 +3314,9 @@ body::before {
     <div class="section-heading-glass-wrap"><h2 class="section-heading reveal section-heading-glass">Запишитесь на пробный урок</h2></div>
     <div class="section-heading-glass-wrap"><p class="section-subheading reveal section-heading-glass">Бесплатное знакомство — определим уровень и составим план</p></div>
     <div class="form-wrapper reveal">
-      <form action="https://formsubmit.co/vanyurina@mail.ru" method="POST">
+      <form id="trialForm" action="https://formsubmit.co/vanyurina@mail.ru" data-ajax-action="https://formsubmit.co/ajax/vanyurina@mail.ru" method="POST">
         <input type="hidden" name="_subject" value="Новая заявка с сайта — пробный урок">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="">
         <input type="hidden" name="_template" value="table">
         <div class="form-group">
           <label for="fname">Ваше имя</label>
@@ -3299,7 +3346,8 @@ body::before {
           <input type="text" id="fcontact" name="Контакт" placeholder="Telegram, WhatsApp или телефон" required>
         </div>
         <p class="form-consent">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
-        <button type="submit" class="btn-submit">Записаться на пробный урок</button>
+        <button type="submit" class="btn-submit" id="trialSubmitBtn">Записаться на пробный урок</button>
+        <div class="form-message" id="trialFormMessage" role="status" aria-live="polite" hidden></div>
       </form>
     </div>
   </div>
@@ -3993,7 +4041,61 @@ body::before {
 
 })();
 
-/* Form submission is handled by formsubmit.co — no JS handler needed */
+/* ========== TRIAL LESSON FORM ========== */
+var trialForm = document.getElementById('trialForm');
+
+if (trialForm) {
+  var trialSubmitBtn = document.getElementById('trialSubmitBtn');
+  var trialFormMessage = document.getElementById('trialFormMessage');
+  var trialSubmitLabel = trialSubmitBtn.textContent;
+
+  function showTrialFormMessage(type, text) {
+    trialFormMessage.className = 'form-message form-message--' + type;
+    trialFormMessage.textContent = text;
+    trialFormMessage.hidden = false;
+  }
+
+  trialForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    if (!trialForm.reportValidity()) return;
+
+    trialSubmitBtn.disabled = true;
+    trialSubmitBtn.textContent = 'Отправляю…';
+    trialFormMessage.hidden = true;
+
+    var payload = {};
+    new FormData(trialForm).forEach(function(value, key) {
+      payload[key] = value;
+    });
+
+    fetch(trialForm.dataset.ajaxAction, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+      .then(function(response) {
+        if (!response.ok) throw new Error('FormSubmit returned ' + response.status);
+        return response.json();
+      })
+      .then(function(data) {
+        if (data.success === false) throw new Error(data.message || 'FormSubmit rejected the request');
+        trialForm.reset();
+        showTrialFormMessage('success', 'Спасибо! Заявка отправлена. Я свяжусь с вами в ближайшее время.');
+      })
+      .catch(function(error) {
+        console.error('Trial form submission failed:', error);
+        showTrialFormMessage('error', 'Не удалось отправить заявку. Проверьте интернет и попробуйте ещё раз.');
+      })
+      .finally(function() {
+        trialSubmitBtn.disabled = false;
+        trialSubmitBtn.textContent = trialSubmitLabel;
+      });
+  });
+}
 </script>
 </body>
 </html>
